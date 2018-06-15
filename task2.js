@@ -1,55 +1,40 @@
-
-    var p1map = [],
-        p2map = ['ooosooooss',
-                'ososoooooo',
-                'ooosoooooo',
-                'ooosooosoo',
-                'ooooooosoo',
-                'osoosoosoo',
-                'osoooooooo',
-                'ososoooooo',
-                'ooooossooo',
-                'ssooooooso'],
-	var w = 10;
-	var h = 10;
+ var vDD = process.argv[2];
+ var month = process.argv[3];
+ var year = bigYear(process.argv[4]);
+  function bigYear(vYear)
+{
+	// ¬исокосный год / 400
+	if ((vYear % 400) === 0)
 	
-	//основная функция
-
-	do
-		 for (i = 0; i < w; i++) for (j = 0; j < h; j++) {
-		  arr(i, j)
-		};
-	  for (i = w * h; i > 0; i--) {
-      if (fire(p2map[Math.round(Math.random() * 10)][Math.round(Math.random()*10)])) backfire();
-	  };
-	  while(p1map.indexOf("s") !== -1 || p2map.indexOf("s") !== -1);
-		
-		//заполенние поля 1
- function arr(i, j) {
-	  if (process.argv[i + j].length == 1) {
-   p1map[i][j] = 's';
-} else {
-   p1map[i][j] = 'o';
+		return 1;
+	else
+		// ¬исокосный год делитс¤ на 4 без остатка, но
+		// год, / 100 без остатка, не високосный
+		if (((vYear % 4) === 0) && ((vYear % 100) !== 0))
+			
+			return 1;
+	// √од не високосный
+	return 0;
 }
- }
- 
-       //огонь по противнику 2
-      function fire(el) {
-        if (el == 'd' || el == 'm') return false;
-        el == 's' ? 'd' : 'm';
-        if (p2map.indexOf("s") == -1) {
-          process.stdout.write('Victory!'); 
-          return false;
-        }
-        if (el === 'm') return true;
-      }
-	  
-	  //огонь по противнику 1, ответный
-      function backfire() {
-        for (i = w * h; i > 0; i--) {
-          if (p1map.indexOf("s") == -1 || fire(p1map[Math.round(Math.random() * 10)][Math.round(Math.random() * 10)])) break;
-        }
-        if (p1map.indexOf("s") !== -1) process.stdout.write('You have lost!');
-      }
 
-  
+  switch (month) {
+  // ¤нварь, февраль, март
+  case 'января': day = 31+28+year+31+30+31+30+31+31+30+31+30+31-vDD; break;
+  case 'февраля': day = 28+year+31+30+31+30+31+31+30+31+30+31-vDD; break;
+  case 'марта': day = 31+30+31+30+31+31+30+31+30+31-vDD; break;
+  // јпрель, ћай, »юнь
+  case 'апреля': day = 30+31+30+31+31+30+31+30+31-vDD; break;
+  case 'мая': day = 31+30+31+31+30+31+30+31-vDD; break;
+  case 'июня': day = 30+31+31+30+31+30+31-vDD; break;
+  // »юль, јвгуст, —ент¤брь
+  case 'июля': day = 31+31+30+31+30+31-vDD; break;
+  case 'августа': day = 31+30+31+30+31-vDD; break;
+  case 'сентября': day = 30+31+30+31-vDD; break;
+  // ќкт¤брь, Ќо¤брь, ƒекабрь
+  case 'октября': day = 31+30+31-vDD; break;
+  case 'ноября': day = 30+31-vDD; break;
+  case 'декабря': day = 31-vDD; break;
+  default:
+  process.stdout.write("Что-то пошло не так.");
+   }
+process.stdout.write(String(day));
